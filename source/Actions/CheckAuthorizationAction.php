@@ -17,18 +17,19 @@ class CheckAuthorizationAction
 
     public function execute()
     {
-        if($this->username === null || $this->password === null){
+        if ($this->username === null || $this->password === null) {
             return false;
 
-        }else{
+        } else {
             $setCookie = false;
             $cookieName = 'grout_login_' . substr(md5($this->name . $this->username), 0, 8);
             $success = false;
 
             // Check post
             if ($this->task->request->post->get('login')) {
-                if ($this->task->request->post->get('username') != $this->username ||
-                      $this->task->request->post->get('password') != $this->password) {
+                if ($this->task->request->post->get('username') != $this->username
+                    || $this->task->request->post->get('password') != $this->password
+                ) {
                     return false;
                 }
 

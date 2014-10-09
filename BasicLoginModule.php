@@ -19,7 +19,7 @@ class BasicLoginModule extends Module
         /** @var BasicLoginConfig moduleConfig */
         $this->moduleConfig = $this->app->configs->getConfig($this->id);
 
-        foreach($this->moduleConfig->urls as $url){
+        foreach ($this->moduleConfig->urls as $url) {
             $this->secureUrl($url);
         }
     }
@@ -33,19 +33,20 @@ class BasicLoginModule extends Module
         $secured = $page->data->get('secured');
         $whitelisted = $task->data->get('whitelistedByBasicLogin');
 
-        if($secured){
-            if($whitelisted){
+        if ($secured) {
+            if ($whitelisted) {
                 return false;
-            }else{
+
+            } else {
                 $a = new CheckAuthorizationAction();
-                if($page->data->get('username')){
+                if ($page->data->get('username')) {
                     $a->username = $page->data->get('username');
                     $a->password = $page->data->get('password');
                     $a->expiration = $page->data->get('expires');
                     $a->name = $page->data->get('name');
                     $a->extendExpiration = $page->data->get('extendExpiration');
 
-                }else{
+                } else {
                     $a->username = $this->moduleConfig->username;
                     $a->password = $this->moduleConfig->password;
                     $a->expiration = $this->moduleConfig->expires;
@@ -57,7 +58,8 @@ class BasicLoginModule extends Module
                 $a->module = $this;
                 return !$a->execute();
             }
-        }else if($secured === false){
+
+        } elseif ($secured === false) {
             $task->data->set('whitelistedByBasicLogin', true);
 
             return false;
