@@ -61,7 +61,15 @@ class CheckAuthorizationAction
             if ($success) {
                 if ($setCookie) {
                     $t = time();
-                    setcookie($cookieName, $t . '_' . md5($t . $this->username . $this->password . $this->name), $t + $this->expiration, '/', null, null, true);
+                    setcookie(
+                        $cookieName,
+                        $t . '_' . md5($t . $this->username . $this->password . $this->name),
+                        $t + $this->expiration,
+                        '/',
+                        null,
+                        null,
+                        true
+                    );
                 }
 
                 return true;

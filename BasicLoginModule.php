@@ -69,9 +69,26 @@ class BasicLoginModule extends Module
     }
 
 
-    public function secureUrl($url, $username = null, $password = null, $name = null, $expires = 86400, $extendExpiration = true)
-    {
-        $this->addRoute($url, 'Pages\SecuredPage', array('secured' => true, 'username' => $username, 'password' => $password, 'name' => $name, 'expires' => $expires, 'extendExpiration' => $extendExpiration));
+    public function secureUrl(
+        $url,
+        $username = null,
+        $password = null,
+        $name = null,
+        $expires = 86400,
+        $extendExpiration = true
+    ) {
+        $this->addRoute(
+            $url,
+            'Pages\SecuredPage',
+            array(
+                'secured' => true,
+                'username' => $username,
+                'password' => $password,
+                'name' => $name,
+                'expires' => $expires,
+                'extendExpiration' => $extendExpiration
+            )
+        );
     }
 
     public function whitelistUrl($url)
