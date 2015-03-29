@@ -24,13 +24,9 @@ class BasicLoginModule extends Module
         }
     }
 
-    /**
-     * @param Task $task
-     * @param Route $page
-     */
-    public function routeRetrieved($task, $page)
+    public function routeRetrieved(Task $task, Route $route)
     {
-        $secured = $page->data->get('secured');
+        $secured = $route->data->get('secured');
         $whitelisted = $task->data->get('whitelistedByBasicLogin');
 
         if ($secured) {
@@ -39,12 +35,12 @@ class BasicLoginModule extends Module
 
             } else {
                 $a = new CheckAuthorizationAction();
-                if ($page->data->get('username')) {
-                    $a->username = $page->data->get('username');
-                    $a->password = $page->data->get('password');
-                    $a->expiration = $page->data->get('expires');
-                    $a->name = $page->data->get('name');
-                    $a->extendExpiration = $page->data->get('extendExpiration');
+                if ($route->data->get('username')) {
+                    $a->username = $route->data->get('username');
+                    $a->password = $route->data->get('password');
+                    $a->expiration = $route->data->get('expires');
+                    $a->name = $route->data->get('name');
+                    $a->extendExpiration = $route->data->get('extendExpiration');
 
                 } else {
                     $a->username = $this->moduleConfig->username;
